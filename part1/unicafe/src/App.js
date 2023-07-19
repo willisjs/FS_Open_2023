@@ -5,7 +5,8 @@ const Statistics = ({good, neutral, bad}) => {
   if (good + neutral + bad === 0) {
     return (
       <div>
-        the app is used by pressing the buttons
+        <br />
+        No feedback given.
       </div>
     )
   }
