@@ -18,9 +18,13 @@ const App = () => {
       name: newName,
       id: persons.length,
     }
-  
-    setPersons(persons.concat(nameObj));
-    setNewName('');
+
+    if (persons.some(person => person.name === newName)) {
+      window.alert(`${newName} is already in the database.`);
+    } else {
+      setPersons(persons.concat(nameObj));
+      setNewName('');
+    } 
   }
 
   return (
