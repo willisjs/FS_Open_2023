@@ -1,12 +1,15 @@
 import { useState } from 'react'
+import SearchFilter from './components/SearchFilter';
+import FilteredNums from './components/FilteredNums';
 
 const App = () => {
   const [persons, setPersons] = useState([
-    { name: 'George P. Burdell', id: 1, phone: '(911) 123-4567'}
+    { name: 'George P. Burdell', id: 1, phone: '(123) 456-7890'}
   ]) 
   
-  const [newName, setNewName] = useState('')
-  const [newPhone, setNewPhone] = useState('')
+  const [newName, setNewName] = useState('');
+  const [newPhone, setNewPhone] = useState('');
+  const [newSearch, setNewSearch] = useState('');
 
   const handleNameChange = (event) => {
     console.log(event.target.value);
@@ -36,8 +39,14 @@ const App = () => {
     } 
   }
 
+  const handleSearch = (event) => {
+    console.log(event.target.value);
+    setNewSearch(event.target.value);
+  }
+
   return (
     <div>
+      <SearchFilter newSearch={newSearch} handleSearch={handleSearch} />
       <h2>Phonebook</h2>
       <form onSubmit={addName}>
         <div>
@@ -50,8 +59,7 @@ const App = () => {
           <button type="submit">add</button>
         </div>
       </form>
-      <h2>Numbers</h2>
-      {persons.map(person => <ul key={person.id}>{person.name} {person.phone}</ul>)}
+      <FilteredNums newSearch={newSearch} persons={persons}/>
     </div>
   )
 }
